@@ -10,12 +10,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 jurnal = pd.read_csv(r"datajurnalnew.csv",sep=";")
 
 def clean_title(title):
-  re.sub("[^a-zA-Z0-9 ]", "", title)
-  return title
-
+  #re.sub("[^a-zA-Z0-9 ]", "", title)
+  #return title
+  return re.sub("[^a-zA-Z0-9 ]", "", title)
 def clean_abstract(abstract):
-  re.sub("[a-zA-Z ]", "", abstract)
-  return abstract
+  #re.sub("[a-zA-Z ]", "", abstract)
+  #return abstract
+  return re.sub("[^a-zA-Z0-9 ]", "", abstract)
 
 jurnal["clean_title"] = jurnal["title"].apply(clean_title)
 jurnal["clean_abstract"] = jurnal["abstract"].apply(clean_abstract)
