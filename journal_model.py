@@ -12,7 +12,7 @@ jurnal = pd.read_csv(r"datajurnalnew.csv",sep=";")
 def clean_title(title):
   re.sub("[^a-zA-Z0-9 ]", "", title)
   return title
-#test
+
 def clean_abstract(abstract):
   re.sub("[a-zA-Z ]", "", abstract)
   return abstract
