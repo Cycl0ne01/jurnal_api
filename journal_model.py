@@ -21,12 +21,15 @@ jurnal["clean_title"] = jurnal["title"].apply(clean_title)
 jurnal["clean_abstract"] = jurnal["abstract"].apply(clean_abstract)
 jurnal["combined"] = jurnal["clean_title"] + " " + jurnal["clean_abstract"]
 
+#deklarasi perhitungan
 #vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words='english')
 vectorizer = TfidfVectorizer(ngram_range=(1, 2))
+#pengolahan data
 tfidf_matrix = vectorizer.fit_transform(jurnal["combined"])
-
+#data yang diolah akan diolah kembali dengan cosine similarity
 cosine_sim_matrix = cosine_similarity(tfidf_matrix)
 
+#pembuatan model machine learning
 def get_recommendations(cosine_sim_matrix, titles, user_input, top_n=5):
     user_tfidf = vectorizer.transform([user_input])
     user_cosine_sim = cosine_similarity(user_tfidf, tfidf_matrix)
@@ -59,5 +62,6 @@ model_data = {
     'get_recommendations': get_recommendations
 }
 
+#model machine learning menjadi bentuk pickle
 with open('recommendation_model.pkl', 'wb') as f:
     pickle.dump(model_data, f)
